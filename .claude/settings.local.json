@@ -90,7 +90,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/feiji/\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/40573817/\")",
-      "Bash(curl -s -o /dev/null -w '%{http_code}' https://1797346220.github.io/boke/projects/__TRACKED_VAR__/)"
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://1797346220.github.io/boke/projects/__TRACKED_VAR__/)",
+      "Bash(curl -s \"https://1797346220.github.io/boke/\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\Admin\\Desktop\\boke\\content\\posts",

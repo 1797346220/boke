@@ -26,6 +26,7 @@ const projects = [
     desc: "QQQ 0DTE 实盘交易系统 v6.2，1 分钟 K 线实时订阅，双路径突破信号，Tkinter 桌面控制面板 + Web 仪表盘，系统托盘常驻，PyInstaller 打包，看门狗崩溃恢复。",
     tags: ["Python", "Longbridge", "Tkinter", "PyInstaller"],
     slug: "qqq-live",
+    github: "https://github.com/1797346220/qqq-trading-system",
   },
 ];
 
@@ -59,8 +60,19 @@ export default function Projects() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <div className="glass-card p-6 h-full hover:border-white/10 transition-all glow">
-                <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors mb-4">
+                <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors mb-4 flex items-center gap-2">
                   {project.title}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-green-500/10 text-green-400 border border-green-500/20 hover:bg-green-500/20 transition-colors"
+                    >
+                      已开源
+                    </a>
+                  )}
                 </h3>
 
                 <p className="text-sm text-gray-400 leading-relaxed mb-4">

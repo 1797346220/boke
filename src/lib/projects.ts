@@ -10,6 +10,7 @@ export interface ProjectMeta {
   desc: string;
   tags: string[];
   tech: string;
+  github?: string;
 }
 
 export interface Project extends ProjectMeta {
@@ -37,6 +38,7 @@ export function getAllProjects(): ProjectMeta[] {
       desc: data.desc || "",
       tags: data.tags || [],
       tech: data.tech || "",
+      github: data.github || "",
     };
   });
 }
@@ -57,6 +59,7 @@ export function getProjectBySlug(slug: string): Project | null {
     desc: data.desc || "",
     tags: data.tags || [],
     tech: data.tech || "",
+    github: data.github || "",
     content,
   };
 }
