@@ -51,7 +51,7 @@ export default function Projects() {
           {projects.map((project, i) => (
             <motion.a
               key={project.title}
-              href={`/projects/${project.slug}/`}
+              href={`/boke/projects/${project.slug}/`}
               className="group block"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

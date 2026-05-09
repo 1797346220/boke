@@ -75,7 +75,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="/blog/"
+            href="/boke/blog/"
             className="px-8 py-3.5 rounded-xl border border-white/10 text-gray-300 font-medium transition-all hover:bg-white/5 hover:border-white/20 hover:-translate-y-0.5"
           >
             阅读博客

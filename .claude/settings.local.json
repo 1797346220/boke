@@ -63,12 +63,40 @@
       "Read(//c/Users/Admin/Desktop/QQQ-yuanxiton/**)",
       "Bash(ls \"C:/Users/Admin/Desktop/wey-miniprogram\")",
       "Read(//c/Users/Admin/Desktop/wey-miniprogram/**)",
-      "Bash(mkdir -p \"c:/Users/Admin/Desktop/boke/src/app/projects/[slug]\")"
+      "Bash(mkdir -p \"c:/Users/Admin/Desktop/boke/src/app/projects/[slug]\")",
+      "Bash(git branch *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git rebase *)",
+      "WebFetch(domain:1797346220.github.io)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/\")",
+      "Bash(curl -s \"https://api.github.com/repos/1797346220/boke/actions/runs?per_page=1\")",
+      "Bash(curl -s \"https://api.github.com/repos/1797346220/boke/actions/runs/25593867319/jobs\")",
+      "Bash(python3 -c \"import sys,json; jobs=json.load\\(sys.stdin\\)['jobs']; [print\\(j['name'], j['conclusion'], j.get\\('steps',[]\\)[-1].get\\('name',''\\), j.get\\('steps',[]\\)[-1].get\\('conclusion',''\\)\\) for j in jobs]\")",
+      "Bash(python3 -c ' *)",
+      "Bash(cat ~/.ssh/id_ed25519.pub)",
+      "Read(//c/Users/Admin/.ssh/**)",
+      "Bash(gh repo *)",
+      "Bash(mkdir -p \"c:/Users/Admin/Desktop/feiji\")",
+      "Bash(git remote *)",
+      "Bash(curl -s \"https://api.github.com/repos/1797346220/feiji/actions/runs?per_page=1\")",
+      "Bash(curl -s \"https://api.github.com/repos/1797346220/feiji/actions/runs/25594966493/jobs\")",
+      "Bash(curl -s \"https://api.github.com/repos/1797346220/feiji/pages\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/feiji/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/40573817/\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://1797346220.github.io/boke/projects/__TRACKED_VAR__/)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Admin\\Desktop\\boke\\content\\posts",
       "C:\\Users\\Admin\\Desktop\\boke",
-      "c:\\Users\\Admin\\Desktop\\boke\\src\\app\\projects"
+      "c:\\Users\\Admin\\Desktop\\boke\\src\\app\\projects",
+      "c:\\Users\\Admin\\Desktop"
     ]
   }
 }
