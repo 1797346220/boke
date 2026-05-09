@@ -1,0 +1,69 @@
+﻿---
+title: "我用长桥 API 给 QQQ 0DTE 策略做回测，差点被数据骗了"
+date: 2026-04-20
+category: AI量化
+excerpt: "我用长桥 API 给 QQQ 0DTE 策略做回测，差点被数据骗了"
+tags: ["AI", "量化", "回测", "Longbridge"]
+---
+
+做量化交易的人都听过一句话：**策略好不好，回测说了算。**
+
+但没人告诉你的是——回测本身就会坑你。数据拿错了、信号过滤太严了、参数看起来漂亮但实盘一塌糊涂……这些都是真实发生在我身上的事。
+
+这篇文章记录我用长桥 API 对 QQQ 0DTE 衰竭反转策略做回测时，踩过的每一个坑。如果你也在用长桥做美股策略回测，希望这些经验能帮你少走弯路。
+
+---## 坑 1：yfinance 不靠谱，长桥 API 才是正道一开始我用 ``yfinance`` 下载历史数据，想着免费就行。结果：
+
+- 频繁被限流（429 Too Many Requests）- 1 分钟数据只能拿最近 30 天- 数据质量参差不齐，偶有缺失**换了长桥 API 之后**，通过 ``history_candlesticks_by_date()`` 可以按天拉取 1 分钟 K 线，每天约 241 根（Basic 级别，仅正式盘），Premium 级别含盘前盘后约 960 根。
+
+![](/boke/images/img_10.jpg)``from longport.openapi import Config, QuoteContext, Period, AdjustType, TradeSessions from datetime import date, timedelta ctx = QuoteContext(Config.from_apikey_env()) # 按天下载，精确控制范围 candles = ctx.history_candlesticks_by_date(    symbol="QQQ.US",    period=Period.Min_1,    adjust_type=AdjustType.ForwardAdjust,    start=date(2026, 4, 14),    end=date(2026, 4, 15),    # 注意：end 不包含这一天    trade_sessions=TradeSessions.All ) print(f"获取到 {len(candles)} 根 K 线")``
+
+### ⚡ 踩坑要点**1. **``**start**``** 和 **``**end**``** 必须是 **``**date**``** 对象，不能是字符串**
+
+``# ❌ 报错：'str' object cannot be cast as 'date' candles = ctx.history_candlesticks_by_date(..., start='2026-04-14', end='2026-04-15') # ✅ 正确 from datetime import date candles = ctx.history_candlesticks_by_date(..., start=date(2026,4,14), end=date(2026,4,15))``
+
+**2. 单次最多返回 1000 根 K 线**
+
+一天的 1 分钟 K 线（含盘前盘后）刚好接近 1000 根的限制。所以**按天循环下载**是正确姿势，别想一口气拉一个月的数据：
+
+``import time from datetime import date, timedelta all_candles = [] current = date(2025, 7, 1) end_date = date(2026, 4, 18) while current SMA20，做空 upper or prev_close 0.0020:
+        continue
+    stages['跳空过滤'] += 1
+
+    # 第四层：SMA20
+    if sig == 'call' and close sma20:
+        continue
+    stages['SMA20'] += 1
+
+    # 第五层：量能
+    if volume - 美东 9:30 开盘 = 北京时间 21:30- 如果代码里写 ``if hour == 9``，实际对应的是北京时间 9 点——**根本不在交易时段内**正确的处理方式：
+
+``from datetime import datetime import pytz # 长桥返回的是 UTC 时间 utc_time = candle.timestamp  # datetime with tzinfo=UTC # 转换为美东时间 et = pytz.timezone('America/New_York') et_time = utc_time.astimezone(et) # 判断是否在交易时段 if et_time.hour == 9 and et_time.minute >= 30:    # 正式开盘    pass``
+
+**WSL 环境的额外坑**：``pip3`` 可能指向系统 Python，而你在虚拟环境里。安装 ``pytz`` 要用：
+
+``# ❌ pip3 install pytz → 可能装到系统 python 去了 # ✅ /usr/bin/python3 -m pip install pytz --break-system-packages``
+
+---## 坑 6：旧数据和新数据合并时格式不统一我的回测数据来自两个时期：
+
+- **旧数据**：CSV 格式，时间列无时区信息- **新数据**：从长桥 API 获取，带 UTC 时区直接 ``pd.concat()`` 会报错或者时间对不上。正确做法：
+
+![](/boke/images/img_11.jpg)``import pandas as pd # 强制统一为 UTC old['Datetime'] = pd.to_datetime(old['Datetime'], utc=True) new['Datetime'] = pd.to_datetime(new['Datetime'], utc=True) # 可选：统一转为美东时间（去掉时区信息，方便按小时筛选）old['Datetime'] = old['Datetime'].dt.tz_convert('America/New_York').dt.tz_localize(None) new['Datetime'] = new['Datetime'].dt.tz_convert('America/New_York').dt.tz_localize(None) # 合并去重 all_data = pd.concat([old, new]).drop_duplicates(subset='Datetime').sort_values('Datetime')``
+
+---## 总结：回测中我学到的 6 件事**数据源要可靠**。yfinance 免费但不稳定，长桥 API 按天下载 1 分钟 K 线是更好的选择，注意 ``start/end`` 必须是 ``date`` 对象，单次最多 1000 根。
+
+**数据粒度要匹配策略**。0DTE 做分钟级交易，必须用 1 分钟数据，5 分钟会漏掉大部分信号。
+
+**回测时一定要做信号漏斗分析**。逐层统计每个过滤条件通过的次数，快速定位瓶颈在哪。
+
+**参数调优有上限**。如果市场状态不支持策略逻辑，调什么参数都没用。要看回测数据是否覆盖了不同市场环境。
+
+**时区处理是重灾区**。长桥返回 UTC 时间，做美股策略需要转成 ET。WSL 下 pip 版本可能串，注意用对 Python。
+
+**数据合并前先统一格式**。旧 CSV 无时区 + API 数据有时区，直接拼会出 bug。先统一为同一时区再去重合并。
+
+---*以上是我在 QQQ 0DTE 策略回测过程中的真实踩坑经历。如果你也在用长桥做量化交易，欢迎交流。*
+
+*本文仅供技术交流，不构成投资建议。*
+
+@LongbridgeAI  $纳指 100 ETF - Invesco(QQQ.US)
