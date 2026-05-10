@@ -91,7 +91,13 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://1797346220.github.io/boke/blog/40573817/\")",
       "Bash(curl -s -o /dev/null -w '%{http_code}' https://1797346220.github.io/boke/projects/__TRACKED_VAR__/)",
-      "Bash(curl -s \"https://1797346220.github.io/boke/\")"
+      "Bash(curl -s \"https://1797346220.github.io/boke/\")",
+      "Bash(curl -sL \"https://longbridge.com/zh-CN/topics/40600851\" -o /tmp/lb_article.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://longbridge.com/zh-CN/topics/40600851\" -o /tmp/lb_article.html)",
+      "Bash(curl -sL -k -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://longbridge.com/zh-CN/topics/40600851\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://longbridge.com/zh-CN/topics/40600851' -UseBasicParsing | Select-Object -ExpandProperty Content\")",
+      "Bash(curl -sL \"https://openapi.longbridgeapp.com/v1/topic/40600851\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\Admin\\Desktop\\boke\\content\\posts",

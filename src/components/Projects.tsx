@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
+    title: "QQQ Live 实盘交易系统",
+    desc: "QQQ 0DTE 实盘交易系统 v6.2，1 分钟 K 线实时订阅，双路径突破信号，Tkinter 桌面控制面板 + Web 仪表盘，系统托盘常驻，PyInstaller 打包，看门狗崩溃恢复。",
+    tags: ["Python", "Longbridge", "Tkinter", "PyInstaller"],
+    slug: "qqq-live",
+    github: "https://github.com/1797346220/qqq-trading-system",
+  },
+  {
     title: "QQQ 0DTE 高频策略 v7",
     desc: "QQQ 末日期权全自动交易系统，5 大信号引擎并行（VWAP 突破、布林带挤压、RSI 背离、EMA 交叉、开盘区间突破），VIX 波动率过滤，实时 WebSocket 仪表盘，飞书通知。",
     tags: ["Python", "FastAPI", "Longbridge", "WebSocket"],
@@ -16,17 +23,11 @@ const projects = [
     slug: "qqq-quant",
   },
   {
-    title: "新能源汽车销售小程序",
-    desc: "微信小程序个人销售应用，展示插电混动车型，落地价计算器，客户线索收集表单，销售顾问电子名片。",
-    tags: ["微信小程序", "WXML", "云开发"],
+    title: "霓虹突击",
+    desc: "经典纵版射击游戏，触屏适配手机操作，支持键盘和触屏双模式，自动射击，敌机编队，Boss 战，道具掉落系统。",
+    tags: ["HTML5", "Canvas", "JavaScript"],
     slug: "wey-miniprogram",
-  },
-  {
-    title: "QQQ Live 实盘交易系统",
-    desc: "QQQ 0DTE 实盘交易系统 v6.2，1 分钟 K 线实时订阅，双路径突破信号，Tkinter 桌面控制面板 + Web 仪表盘，系统托盘常驻，PyInstaller 打包，看门狗崩溃恢复。",
-    tags: ["Python", "Longbridge", "Tkinter", "PyInstaller"],
-    slug: "qqq-live",
-    github: "https://github.com/1797346220/qqq-trading-system",
+    link: "https://1797346220.github.io/feiji/",
   },
 ];
 
@@ -52,7 +53,9 @@ export default function Projects() {
           {projects.map((project, i) => (
             <motion.a
               key={project.title}
-              href={`/boke/projects/${project.slug}/`}
+              href={project.link || `/boke/projects/${project.slug}/`}
+              target={project.link ? "_blank" : undefined}
+              rel={project.link ? "noopener noreferrer" : undefined}
               className="group block"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
