@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllProjects, getProjectBySlug } from "@/lib/projects";
 import Footer from "@/components/Footer";
+import WeChatFloat from "@/components/WeChatFloat";
 import Link from "next/link";
 
 export function generateStaticParams() {
@@ -105,6 +106,7 @@ export default async function ProjectDetailPage({
         </div>
       </article>
       <Footer />
+      {slug === "qqq-live" && <WeChatFloat />}
     </>
   );
 }

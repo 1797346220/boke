@@ -66,17 +66,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center gap-4">
-          <div className="glass-card p-3 rounded-xl">
-            <img
-              src="/boke/weixinqun.jpg"
-              alt="微信二维码"
-              className="w-32 h-32 object-contain rounded-lg"
-            />
-          </div>
-          <p className="text-xs text-gray-400">扫码加微信</p>
-        </div>
-
         <div className="mt-8 pt-8 border-t border-white/5 text-center text-xs text-gray-600">
           © {new Date().getFullYear()} 热血青年
         </div>
