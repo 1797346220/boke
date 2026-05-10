@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function WeChatFloat() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
