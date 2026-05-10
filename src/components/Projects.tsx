@@ -24,7 +24,7 @@ const projects = [
   },
   {
     title: "霓虹突击",
-    desc: "霓虹风格纵版射击游戏，简单/困难/地狱三种难度，4种独特战机（幻影/烈焰/寒冰/雷霆），多种子弹样式与拖尾特效，Boss 战，道具掉落，触屏适配。",
+    desc: "霓虹风格纵版射击游戏，故事模式4章通关+无尽模式存活挑战，简单/困难/地狱三种难度，4种独特战机，多种子弹特效，每章独立BGM，Boss 战，触屏适配。",
     tags: ["HTML5", "Canvas", "JavaScript"],
     slug: "wey-miniprogram",
     link: "https://1797346220.github.io/feiji/",
