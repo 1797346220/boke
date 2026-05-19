@@ -10,7 +10,7 @@ export default function WeChatFloat() {
       {open && (
         <div className="glass-card p-4 rounded-xl mb-3 w-56 animate-fade-in">
           <img
-            src="/boke/weixinqun.jpg"
+            src="/boke/weixinqun.png"
             alt="微信交流群"
             className="w-full h-auto rounded-lg"
           />
